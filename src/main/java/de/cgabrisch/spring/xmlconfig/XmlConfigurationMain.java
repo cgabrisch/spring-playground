@@ -13,6 +13,7 @@ public class XmlConfigurationMain {
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
             <bean name="helloWorld hwAlias" class="de.cgabrisch.spring.xmlconfig.HelloWorldBean" />
+            <alias name="helloWorld" alias="hwAnotherAlias" />
         </beans>
             """;
 
@@ -22,9 +23,11 @@ public class XmlConfigurationMain {
         try (GenericXmlApplicationContext appContext = new GenericXmlApplicationContext(beansXml)) {
             var helloWorldBean = appContext.getBean("helloWorld", HelloWorldBean.class);
             var hwAliasBean = appContext.getBean("hwAlias", HelloWorldBean.class);
+            var hwAnotherAlias = appContext.getBean("hwAnotherAlias", HelloWorldBean.class);
 
             helloWorldBean.helloWorld();
-            System.out.println(String.format("Aliased bean is identical: %b", helloWorldBean == hwAliasBean));
+            System.out.println(String.format("hwAliasBean is identical to helloWorldBean: %b", helloWorldBean == hwAliasBean));
+            System.out.println(String.format("hwAnotherAlias is identical to helloWorldBean: %b", helloWorldBean == hwAnotherAlias));
         }
     }
 
