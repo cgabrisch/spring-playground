@@ -1,4 +1,4 @@
-package de.cgabrisch.spring.xmlconfig;
+package de.cgabrisch.springplayground.framework.core.xmlconfig;
 
 class HelloWorldBean {
     void helloWorld() {
